@@ -1,0 +1,19 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Shamil",
+      "phone": "89280080895"
+    },
+    {
+      "id": 2,
+      "name": "Ahmed",
+      "phone": "89280080895"
+    }
+  ],
+  "admin": {
+    "login": "admin",
+    "password": "pass",
+    "token": "qwerty9595"
+  }
+}
