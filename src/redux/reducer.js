@@ -1,6 +1,8 @@
 const initialState = {
   contacts: [],
   contactsLoading: false,
+  addNews: [],
+  search: '',
 
   token: "",
   authorizing: false,
@@ -27,6 +29,18 @@ export default (state = initialState, action) => {
         error: true
       }
     }
+    case 'comments/load/start':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'comments/load/success':
+      return {
+        ...state,
+        addNews: [...state.addNews, action.payload],
+        loading: false,
+      };
+
 
     default:
       return state;

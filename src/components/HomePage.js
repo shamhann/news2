@@ -10,9 +10,11 @@ function HomePage (props) {
     <BrowserRouter>
      <div className='row justify-content-center'>
        <div className='col-8'>
+       <div className='HomePage'>
          <Header/>
          <Main/>
          <Footer/>
+       </div>
        </div>
      </div>
     </BrowserRouter>

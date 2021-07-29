@@ -2,7 +2,7 @@ export const loadLogin = (login,password) => (dispatch) => {
   dispatch({
     type: 'auth/started'
   })
-  fetch('http://localhost:3000/admin')
+  fetch('http://localhost:3004/admin')
     .then(response => response.json())
     .then((json) => {
       const random = Math.random();
@@ -20,3 +20,30 @@ export const loadLogin = (login,password) => (dispatch) => {
       }
     })
 }
+export const loadComment = ( name, text) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'comments/load/start',
+    });
+    fetch('http://localhost:3004/contacts', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name,
+        text: text,
+        date: new Date().toLocaleString(),
+      }),
+      headers: {
+        'Content-type': 'application/json;',
+      },
+    }).then(() => {
+      dispatch({
+        type: 'comments/load/success',
+        payload: {
+          name: name,
+          text: text,
+          date: new Date().toLocaleString(),
+        },
+      });
+    });
+  };
+};
