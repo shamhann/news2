@@ -2,9 +2,8 @@ const initialState = {
   contacts: [],
   contactsLoading: false,
   addNews: [],
-  search: '',
 
-  token: "",
+  token: localStorage.getItem('auth-token'),
   authorizing: false,
   error: false
 }
@@ -32,14 +31,34 @@ export default (state = initialState, action) => {
     case 'comments/load/start':
       return {
         ...state,
-        loading: true,
+        contactsLoading: true,
       };
     case 'comments/load/success':
       return {
         ...state,
         addNews: [...state.addNews, action.payload],
-        loading: false,
+        contactsLoading: false,
       };
+    case 'auth/logout':
+      return {
+        ...state,
+        token: null
+      }
+    case 'delete/start':
+      return {
+        ...state,
+        contactsLoading: true
+      }
+    case 'deleted/news':
+      return {
+        ...state,
+        addNews: state.addNews.filter((deleted) => {
+          if (deleted.id === action.payload) {
+            return false
+          }
+        }),
+        contactsLoading: false,
+      }
 
 
     default:

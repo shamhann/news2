@@ -13,6 +13,7 @@ export const loadLogin = (login,password) => (dispatch) => {
           payload: json
         })
       } else {
+        localStorage.setItem('auth-token',json.token)
         dispatch({
           type: 'auth/succeed',
           payload: json
@@ -47,3 +48,26 @@ export const loadComment = ( name, text) => {
     });
   };
 };
+export const logoutStart =() => {
+  localStorage.removeItem('auth-token')
+
+  return{
+    type: 'auth/logout'
+  }
+}
+export const removeNews = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'deleted/start',
+    });
+    fetch(`http://localhost:3004/admin${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'deleted/news'
+        })
+      })
+  }
+}
